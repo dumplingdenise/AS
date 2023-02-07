@@ -1,0 +1,71 @@
+﻿@page 
+@model FreshFarmMarket.Pages.UserHomeModel
+@using Microsoft.AspNetCore.Identity
+@using FreshFarmMarket.Model
+@using FreshFarmMarket.ViewModels
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@*@inject var dataProtectionProvider = DataProtectionProvider.Create("EncryptData");
+@inject var protector = dataProtectionProvider.CreateProtector("MySecretKey");*@
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h6 class="display-6">@ViewData["Title"]</h6>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <p>
+                        User Image:  <img id="imgPreview" class="rounded-circle"
+                                                        style="height:150px;width:150px;object-fit:cover"
+                                                        src="@(string.IsNullOrEmpty(user.ImageURL) ?
+                                                        "/uploads/user.png" : user.ImageURL)"
+                                                        onerror="this.src='/uploads/stitch.jpg'" />
+                        <input class="form-control d-none" asp-for="@user.ImageURL" />
+                    </p>
+
+                    <p>Full Name: @(user != null ? @user.Name : ""!)</p>
+
+                    <div>About Me: @(user != null ? @user.Aboutme : ""!)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h4>More details</h4>
+                    <p>Gender: 
+                        @if (user.Gender == "F")
+                        {
+                        <span>Female</span>
+                        }
+                        else
+                        {
+                        <span>Male</span>
+                        }
+                    </p>
+
+                    <p>Credit Card Number: @(user != null ? @user.CreditCard : ""!)</p>
+                    <p>Mobile Number: @(user != null ? @user.PhoneNumber : ""!)</p>
+                    <p>Deliver Address: @(user != null ? user.DeliveryAdd : ""!)</p>
+                    <p>Email Address: @HttpContext.Session.GetString("_Name")</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+
+

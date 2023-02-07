@@ -1,0 +1,211 @@
+﻿@page
+@model FreshFarmMarket.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+@using AspNetCore.ReCaptcha
+
+<h3 class="display-6">@ViewData["Title"]</h3>
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+
+			<form method="post" enctype="multipart/form-data">
+
+				<div class="col">
+					<div class="mb-3">
+						<input type="file" accept="image/jpg" asp-for="Upload"
+						class="form-control" onchange="showImgPreview(this)" />
+						<span asp-validation-for="Upload" class="text-danger"></span>
+					</div>
+					<img id="imgPreview" class="rounded-circle"
+					style="height:300px;width:300px;object-fit:cover"
+					src="/uploads/stitch.jpg" />
+				</div>
+
+				<div class="row mb-3">
+					<label class="form-label" asp-for="RModel.Name"></label>
+					<div class="col-sm-10">
+						<input type="Text" asp-for="RModel.Name" class="form-control" />
+						<span class="text-danger" asp-validation-for="RModel.Name"></span>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.CreditCard">Credit card</label>
+					<div class="col-sm-10" >
+						<input type="Text" asp-for="RModel.CreditCard" class="form-control" />
+						<span asp-validation-for="RModel.CreditCard" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<label class="form-label">Gender</label>
+					<div class="col-sm-10 d-flex align-items-center">
+						<div class="form-check form-check-inline"> 
+							@Html.RadioButtonFor(m => m.RModel.Gender, "M", new {@class = "form-check-input"})
+							<label class="form-check-label">Male</label>													
+						</div>
+						<div class="form-check form-check-inline">
+							@Html.RadioButtonFor(m => m.RModel.Gender, "F", new {@class = "form-check-input"})
+							<label class="form-check-label">Female</label>
+						</div>
+						<span asp-validation-for="RModel.Gender" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<label class="form-label" asp-for="RModel.MobileNo">Mobile number</label>
+					<div class="col-sm-10">
+						<input type="Text" asp-for="RModel.MobileNo" class="form-control" />
+						<span asp-validation-for="RModel.MobileNo" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<label class="form-label" asp-for="RModel.DeliveryAdd">Delivery address</label>
+					<div class="col-sm-10">
+						<input type="Text" asp-for="RModel.DeliveryAdd" class="form-control" />
+						<span asp-validation-for="RModel.DeliveryAdd" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.EmailAddress">Email Address</label>
+					<div class="col-sm-10">
+						<input type="Text" asp-for="RModel.EmailAddress" class="form-control" />
+						<span asp-validation-for="RModel.EmailAddress" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Password">Password</label>
+					<div class="col-sm-10">
+						<input type="Password" asp-for="RModel.Password" id="password" class="form-control" />
+					</div>
+					<span asp-validation-for="RModel.Password" class="text-danger"></span>
+					<div id="message">
+						<h6>Password must contain the following:</h6>				
+						<p id="upper" class="text-danger">At least 1 <b>uppercase</b> letter</p>
+						<p id="lower" class="text-danger">At least 1 <b>lowercase</b> letter</p>
+						<p id="number" class="text-danger">At least 1 <b>number</b></p>
+						<p id="special" class="text-danger">At least 1 <b>special case</b> character</p>
+						<p id="length" class="text-danger">At least <b>12 characters</b> long</p>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.ConfirmPassword">Confirm Password</label>
+					<div class="col-sm-10">
+						<input type="Password" asp-for="RModel.ConfirmPassword" class="form-control" />
+						<span asp-validation-for="RModel.ConfirmPassword" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Aboutme"></label>
+					<div class="col-sm-10">
+						<textarea class="form-control" asp-for="RModel.Aboutme" rows="3"></textarea>
+						<span asp-validation-for="RModel.Aboutme" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+				@Html.ReCaptcha()
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+
+<style>
+	#message {
+		display: none;
+		margin-top: 10px;
+	}
+</style>
+
+<script>
+	var pwInput = document.getElementById("password")
+	var upper = document.getElementById("upper")
+	var lower = document.getElementById("lower")
+	var number = document.getElementById("number")
+	var special = document.getElementById("special")
+	var length = document.getElementById("length")
+
+	pwInput.onfocus = function() {
+		document.getElementById("message").style.display = "block";
+	}
+
+	pwInput.onkeyup = function() {
+		var lowerCase = /[a-z]/g;
+		if (pwInput.value.match(lowerCase)) {
+			lower.classList.remove("text-danger")
+			lower.classList.add("text-success")
+		}
+		else {
+				lower.classList.remove("text-success")
+				lower.classList.add("text-danger")
+		}
+
+		var upperCase = /[A-Z]/g;
+		if (pwInput.value.match(upperCase)) {
+			upper.classList.remove("text-danger")
+			upper.classList.add("text-success")
+		}
+		else {
+			upper.classList.remove("text-success")
+			upper.classList.add("text-danger")
+		}
+
+		var num = /[0-9]/g;
+		if (pwInput.value.match(num)) {
+			number.classList.remove("text-danger")
+			number.classList.add("text-success")
+		}
+		else {
+			number.classList.remove("text-success")
+			number.classList.add("text-danger")
+		}
+
+		var specialCase = /[#@@!$%&]/g;
+		if (pwInput.value.match(specialCase)) {
+			special.classList.remove("text-danger")
+			special.classList.add("text-success")
+		}
+		else {
+			special.classList.remove("text-success")
+			special.classList.add("text-danger")
+		}
+
+		if (pwInput.value.length < 12) {
+				length.classList.remove("text-success")
+				length.classList.add("text-danger")
+		}
+		else {
+			
+				length.classList.remove("text-danger")
+				length.classList.add("text-success")
+		}
+	}
+
+		function showImgPreview(input) {
+			if (input.files[0]) {
+				var uploadimg = new FileReader();
+				uploadimg.onload = function (displayimg) {
+					$("#imgPreview").attr('src', displayimg.target.result);
+				}
+				uploadimg.readAsDataURL(input.files[0]);
+			}
+		}
+</script>
