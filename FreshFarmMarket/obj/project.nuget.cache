@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "okYihEUS4RAre4f38TITALicpghTug4KR1/0kmUgGZ1BAQFqpb3s1rv0uSrR/ZYLy8ADDzMwZUkLxj+psdfHOw==",
+  "dgSpecHash": "g7hxbnPyRRjAhEmgZcUpOrzP/dhT9u1IiW6QIUBNRZZifGqkD6B4YxSTE2R1P4vepr+Mh7v1TjsPzoOI5RhvoA==",
   "success": true,
   "projectFilePath": "C:\\Users\\dxnis\\Desktop\\POLY\\Y2 SEM 2\\AS\\Assignment\\FreshFarmMarket\\FreshFarmMarket\\FreshFarmMarket.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dxnis\\.nuget\\packages\\aspnetcore.recaptcha\\1.7.0\\aspnetcore.recaptcha.1.7.0.nupkg.sha512",
     "C:\\Users\\dxnis\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\dxnis\\.nuget\\packages\\jquery\\1.4.4\\jquery.1.4.4.nupkg.sha512",
+    "C:\\Users\\dxnis\\.nuget\\packages\\jquery.validation\\1.19.5\\jquery.validation.1.19.5.nupkg.sha512",
     "C:\\Users\\dxnis\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
     "C:\\Users\\dxnis\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",
     "C:\\Users\\dxnis\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.0.nupkg.sha512",
